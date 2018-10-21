@@ -37,16 +37,19 @@ public class IndexController {
     @RequestMapping("/recettes")
     public String recettes(SearchForm searchForm, ModelMap model) {
         PageQuery pageQuery = new PageQuery();
-        pageQuery.setIndex(searchForm.getPageIndex() - 1);
+        int index=searchForm.getPageIndex();
+        if (index<=0) index=1;
+        pageQuery.setIndex(index - 1);
         pageQuery.setTag(searchForm.getTag());
 
         Pagination pagination = new Pagination();
-        pagination.setPageIndex(searchForm.getPageIndex());
+        pagination.setPageIndex(index);
         pagination.setPageSize(pageQuery.getSize());
         pagination.setCount(recipeService.countByQuery(pageQuery));
 
         model.put("recipes", recipeService.findByQuery(pageQuery));
         model.put("pagination", pagination);
+        model.put("searchForm",searchForm);
 
         return "recettes";
     }
@@ -67,17 +70,31 @@ public class IndexController {
 
         return columns;
     }
+    @RequestMapping("/404")
+    public String erreur(){
+        return "error";
 
-    @RequestMapping("/recette/{id}")
+    }
+
+    @RequestMapping("/500")
+    public String erreurbis() {
+        return "errorbis";
+    }
+        @RequestMapping("/recette/{id}")
     public String recette(@PathVariable("id") String id, ModelMap model) {
-        model.put("recipe", recipeService.findById(id));
 
+        if (recipeService.findById(id)==null){
+            throw new RecipException();
+
+        }
+
+        model.put("recipe", recipeService.findById(id));
         return "recette";
     }
 
     @RequestMapping("/contact")
     public String contact() {
-        return "contac";
+        return "contact";
     }
 
     @RequestMapping("/mentions-legales")
@@ -85,4 +102,5 @@ public class IndexController {
         return "mentions-legales";
     }
 }
+
 

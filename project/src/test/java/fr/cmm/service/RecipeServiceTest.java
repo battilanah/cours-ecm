@@ -20,9 +20,9 @@ import java.util.stream.StreamSupport;
 import static fr.cmm.SpringProfiles.INTEG;
 import static java.util.Arrays.asList;
 import static java.util.stream.StreamSupport.stream;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ImageServiceTestConfig.class)
+
 @ActiveProfiles(INTEG)
 public class RecipeServiceTest {
     @Inject
@@ -102,5 +102,9 @@ public class RecipeServiceTest {
         recipeService.save(new Recipe().withTags("tag2", "tag3"));
 
         Assert.assertEquals(asList("tag1", "tag2", "tag3"), recipeService.findAllTags());
+    }
+
+    public void findByIdWithInvalidId() {
+        Assert.assertNull(recipeService.findById("154515"));
     }
 }

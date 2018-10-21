@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Erreur</title>
+    <title>Error</title>
 </head>
 <body>
 <p>Erreur</p>

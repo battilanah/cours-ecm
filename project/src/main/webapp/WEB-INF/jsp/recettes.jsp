@@ -32,7 +32,7 @@
 
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/recettes">Toutes les recette</a></li>
+                    <li><a href="/recettes">Toutes les recettes</a></li>
                     <li><a href="/recette-du-moment">Recette du moment</a></li>
                 </ul>
             </div>
@@ -45,7 +45,7 @@
         <form class="form-inline">
             <div class="form-group">
                 <label for="tag">Tag</label>
-                <input type="text" data-role="tags" data-service-url="/tags.json" data-limit="1" class="form-control" id="tag" placeholder="Tag" name="tag" style="width: 200px;">
+                <input type="text" data-role="tags" data-service-url="/tags.json" data-limit="1" class="form-control" id="tag" placeholder="Tag" name="tag" style="width: 200px;" value="${searchForm.tag}">
             </div>
             <button type="submit" class="btn btn-default">Rechercher</button>
         </form>
